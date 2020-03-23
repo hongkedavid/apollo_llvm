@@ -1,30 +1,28 @@
 Apollo+LLVM Notes
 ===
 
-## Tips
+## Download Apollo source code and docker container
 
-- ***!!! Do not use `dev_start.sh` to start dev docker after rebooting the machine***
-
-    For the first time of starting Apollo dev docker, you can use `bash docker/scripts/dev_start.sh`. However, after rebooting, if you still use `dev_start.sh`, you will lose all previous modifications within the docker, because the dev docker container will be deleted. Using the following commands can avoid such issue.
-
-    **Apollo 3.0**
+1. Download Apollo 3.0 source code
 
     ```bash
-    docker run -it -d --rm --name apollo_localization_volume apolloauto/apollo:localization_volume-x86_64-latest
-    docker run -it -d --rm --name apollo_yolo3d_volume apolloauto/apollo:yolo3d_volume-x86_64-latest
-    docker run -it -d --rm --name apollo_map_volume-sunnyvale_big_loop apolloauto/apollo:map_volume-sunnyvale_big_loop-latest
-    docker run -it -d --rm --name apollo_map_volume-sunnyvale_loop apolloauto/apollo:map_volume-sunnyvale_loop-latest
+    wget https://github.com/ApolloAuto/apollo/archive/v3.0.0.tar.gz
+    tar xf https://github.com/ApolloAuto/apollo/archive/v3.0.0.tar.gz
+    ```
 
-    # Make sure that you can see `apollo_dev` in `docker ps -a` as `EXITED`
-    docker start apollo_dev
+2. Download and start Apollo docker container
 
+    ```bash
+    cd apollo-3.0.0/
+    bash docker/scripts/dev_start.sh
     bash docker/scripts/dev_into.sh
     ```
 
-- May need to delete inconsistent `gtest` header file
+3. Enter the docker container to compile Apollo
     ```bash
-    sudo mv /usr/include/gtest /usr/include/gtest_bak
+    bash docker/scripts/dev_into.sh
     ```
+
 
 ## Compile Apollo using LLVM
 
@@ -84,3 +82,30 @@ Apollo+LLVM Notes
     file planning.bc
     llvm-dis planning.bc
     ```
+
+
+## Tips
+
+- ***!!! Do not use `dev_start.sh` to start dev docker after rebooting the machine***
+
+    For the first time of starting Apollo dev docker, you can use `bash docker/scripts/dev_start.sh`. However, after rebooting, if you still use `dev_start.sh`, you will lose all previous modifications within the docker, because the dev docker container will be deleted. Using the following commands can avoid such issue.
+
+    **Apollo 3.0**
+
+    ```bash
+    docker run -it -d --rm --name apollo_localization_volume apolloauto/apollo:localization_volume-x86_64-latest
+    docker run -it -d --rm --name apollo_yolo3d_volume apolloauto/apollo:yolo3d_volume-x86_64-latest
+    docker run -it -d --rm --name apollo_map_volume-sunnyvale_big_loop apolloauto/apollo:map_volume-sunnyvale_big_loop-latest
+    docker run -it -d --rm --name apollo_map_volume-sunnyvale_loop apolloauto/apollo:map_volume-sunnyvale_loop-latest
+
+    # Make sure that you can see `apollo_dev` in `docker ps -a` as `EXITED`
+    docker start apollo_dev
+
+    bash docker/scripts/dev_into.sh
+    ```
+
+- May need to delete inconsistent `gtest` header file
+    ```bash
+    sudo mv /usr/include/gtest /usr/include/gtest_bak
+    ```
+
