@@ -72,8 +72,6 @@ Apollo+LLVM Notes
 
 6. Extract bitcode file (e.g., `planning` module)
 
-    **Apollo 3.0**
-
     ```bash
     cd /apollo/bazel-bin/modules/planning
     extract-bc planning
