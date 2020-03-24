@@ -41,8 +41,6 @@ toolchain {
   compiler_flag: "-Wall"
   compiler_flag: "-Wno-everything"
   compiler_flag: "-g"
-  compiler_flag: "-flto"
-  compiler_flag: "-fwhole-program-vtables"
 
   cxx_flag: "-mno-sse3"
   cxx_flag: "-std=c++11"
