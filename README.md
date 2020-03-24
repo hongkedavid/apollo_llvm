@@ -41,10 +41,12 @@ Apollo+LLVM Notes
     sudo ln -sf /usr/bin/llvm-link-8 /usr/bin/llvm-link
     ```
 
-2. Install `whole-program-llvm`
+2. Install a customized `whole-program-llvm` fro SRI-CSL 
 
     ```bash
-    sudo pip install wllvm
+    git clone https://github.com/SRI-CSL/whole-program-llvm.git
+    cd whole-program-llvm
+    sudo make develop
     ```
 
 3. Copy `wllvm` directory to `/apollo/tools`
